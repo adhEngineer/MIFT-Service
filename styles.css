@@ -482,62 +482,46 @@ img {
   color: var(--muted);
 }
 
-.animated-window {
+.service-photo {
   position: relative;
   min-height: 440px;
+  margin: 0;
   border-radius: var(--radius);
-  background:
-    linear-gradient(135deg, rgba(17, 94, 138, 0.08), rgba(47, 143, 91, 0.1)),
-    #f9fbfc;
+  background: var(--soft);
   border: 1px solid var(--line);
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
-.frame {
+.service-photo img {
   position: absolute;
-  inset: 54px 48px 72px;
-  border: 15px solid #c6d2da;
-  border-radius: 8px;
-  background: #eef6fb;
-  box-shadow: inset 0 0 0 8px #ffffff, 0 20px 40px rgba(23, 34, 45, 0.13);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 50%;
 }
 
-.pane-left,
-.pane-right {
+.service-photo::after {
+  content: "";
   position: absolute;
-  inset: 8px;
-  width: calc(50% - 10px);
-  border: 5px solid #ffffff;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(139, 160, 173, 0.24));
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(0deg, rgba(17, 27, 36, 0.62), transparent);
+  pointer-events: none;
 }
 
-.pane-right {
-  left: calc(50% + 2px);
-  transform-origin: left center;
-  animation: closePane 4s ease-in-out infinite;
-}
-
-.handle {
+.service-photo figcaption {
   position: absolute;
-  right: 36px;
-  top: 50%;
-  width: 8px;
-  height: 50px;
-  border-radius: 999px;
-  background: var(--blue);
-  transform: translateY(-50%);
-}
-
-.adjustment-line {
-  position: absolute;
-  right: 66px;
-  bottom: 50px;
-  width: 122px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--green);
-  transform-origin: 100% 50%;
-  animation: tune 2.6s ease-in-out infinite;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  z-index: 1;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.25;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
 }
 
 .area-band {
@@ -807,12 +791,8 @@ img {
     grid-template-columns: 42px minmax(0, 1fr);
   }
 
-  .animated-window {
+  .service-photo {
     min-height: 330px;
-  }
-
-  .frame {
-    inset: 44px 28px 62px;
   }
 
   .area-band,
