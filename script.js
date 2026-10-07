@@ -3,8 +3,6 @@ const statusEl = document.querySelector("#formStatus");
 
 if (form && statusEl) {
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
     const data = new FormData(form);
     const name = String(data.get("name") || "").trim();
     const phone = String(data.get("phone") || "").trim();
@@ -13,14 +11,22 @@ if (form && statusEl) {
     const message = String(data.get("message") || "").trim();
 
     if (!name || !phone || !city || !service || !message) {
+      event.preventDefault();
       statusEl.textContent = "Completează câmpurile obligatorii înainte de trimitere.";
       statusEl.style.color = "#b84b2f";
       return;
     }
 
+    const photo = data.get("attachment");
+    if (photo instanceof File && photo.size > 10 * 1024 * 1024) {
+      event.preventDefault();
+      statusEl.style.color = "#b84b2f";
+      statusEl.textContent = "Fotografia depășește 10 MB. Alege o imagine mai mică.";
+      return;
+    }
+
     statusEl.style.color = "#2f8f5b";
-    statusEl.textContent = `Cererea pentru ${service.toLowerCase()} a fost pregătită. Pentru confirmare rapidă, sună la 0742513255.`;
-    form.reset();
+    statusEl.textContent = "Continuă pe pagina de trimitere pentru a confirma cererea.";
   });
 }
 
